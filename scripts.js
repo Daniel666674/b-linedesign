@@ -3,19 +3,76 @@
 (function () {
   'use strict';
 
+  /* ─── PRELOADER ─── */
+  const preloader = document.getElementById('preloader');
+  document.body.style.overflow = 'hidden';
+
+  function dismissPreloader() {
+    preloader.classList.add('done');
+    document.body.style.overflow = '';
+    // Trigger hero animations right as preloader slides up
+    setTimeout(() => {
+      document.body.classList.add('hero-ready');
+    }, 200);
+    setTimeout(() => preloader.remove(), 1200);
+  }
+
+  // Wait for assets or 2s max
+  if (document.readyState === 'complete') {
+    setTimeout(dismissPreloader, 1600);
+  } else {
+    window.addEventListener('load', () => setTimeout(dismissPreloader, 1600));
+  }
+
+  /* ─── CUSTOM CURSOR ─── */
+  const cursorDot = document.getElementById('cursor-dot');
+  const cursorRing = document.getElementById('cursor-ring');
+
+  if (cursorDot && cursorRing && !('ontouchstart' in window)) {
+    document.body.classList.add('has-cursor');
+
+    let mx = -100, my = -100;
+    let rx = -100, ry = -100;
+
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursorDot.style.transform = `translate(${mx}px,${my}px)`;
+    }, { passive: true });
+
+    (function animateRing() {
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      cursorRing.style.transform = `translate(${rx}px,${ry}px)`;
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button, .service-card, .portfolio-item').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
+    });
+  }
+
+  /* ─── SCROLL PROGRESS ─── */
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrolled = document.documentElement.scrollTop;
+    const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (progressBar) progressBar.style.width = ((scrolled / max) * 100) + '%';
+  }, { passive: true });
+
   /* ─── NAV SCROLL ─── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  /* scroll logo back to top */
   document.getElementById('nav-logo-link').addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ─── SMOOTH SCROLL for anchor links ─── */
+  /* ─── SMOOTH SCROLL ─── */
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href').slice(1);
@@ -55,29 +112,36 @@
     heroVideo.style.height = '100%';
     heroVideo.style.objectFit = 'cover';
     heroVideo.style.opacity = '0';
-    heroVideo.style.transition = 'opacity 1.2s ease';
+    heroVideo.style.transition = 'opacity 1.4s ease';
 
     heroVideo.addEventListener('canplay', () => {
       heroVideo.style.opacity = '1';
       if (heroImg) heroImg.style.opacity = '0';
+      heroImg.style.transition = 'opacity 1.4s ease';
     }, { once: true });
   }
+
+  /* ─── PARALLAX HERO ─── */
+  const heroBg = document.querySelector('.hero-bg');
+  window.addEventListener('scroll', () => {
+    if (!heroBg || window.scrollY > window.innerHeight) return;
+    heroBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+  }, { passive: true });
 
   /* ─── SCROLL REVEAL ─── */
   const revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
-    const revealObs = new IntersectionObserver((entries) => {
+    const obs = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          revealObs.unobserve(entry.target);
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-
-    revealEls.forEach((el) => revealObs.observe(el));
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => obs.observe(el));
   } else {
-    revealEls.forEach((el) => el.classList.add('visible'));
+    revealEls.forEach(el => el.classList.add('visible'));
   }
 
   /* ─── ANIMATED COUNTERS ─── */
@@ -86,31 +150,29 @@
   function animateCounter(el) {
     const end = parseInt(el.dataset.count, 10);
     const suffix = el.dataset.suffix || '';
-    const duration = 2000;
-    const startTime = performance.now();
-
+    const duration = 2200;
+    const start = performance.now();
     function step(now) {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 4);
       el.textContent = Math.floor(eased * end) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
+      if (p < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
   if ('IntersectionObserver' in window) {
-    const counterObs = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const cObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           animateCounter(entry.target);
-          counterObs.unobserve(entry.target);
+          cObs.unobserve(entry.target);
         }
       });
     }, { threshold: 0.5 });
-
-    statEls.forEach((el) => counterObs.observe(el));
+    statEls.forEach(el => cObs.observe(el));
   } else {
-    statEls.forEach((el) => {
+    statEls.forEach(el => {
       el.textContent = el.dataset.count + (el.dataset.suffix || '');
     });
   }
@@ -118,9 +180,7 @@
   /* ─── PORTFOLIO DRAG SCROLL ─── */
   const portfolioScroll = document.getElementById('portfolio-scroll');
   if (portfolioScroll) {
-    let isDragging = false;
-    let startX = 0;
-    let startScrollLeft = 0;
+    let isDragging = false, startX = 0, startScrollLeft = 0;
 
     portfolioScroll.addEventListener('mousedown', (e) => {
       isDragging = true;
@@ -128,75 +188,86 @@
       startScrollLeft = portfolioScroll.scrollLeft;
       portfolioScroll.style.cursor = 'grabbing';
     });
-
     document.addEventListener('mouseup', () => {
       isDragging = false;
       portfolioScroll.style.cursor = 'grab';
     });
-
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       e.preventDefault();
       const x = e.pageX - portfolioScroll.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      portfolioScroll.scrollLeft = startScrollLeft - walk;
+      portfolioScroll.scrollLeft = startScrollLeft - (x - startX) * 1.5;
     });
 
-    /* touch support */
-    let touchStartX = 0;
-    let touchStartScrollLeft = 0;
-
+    let touchStartX = 0, touchStartSL = 0;
     portfolioScroll.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].pageX;
-      touchStartScrollLeft = portfolioScroll.scrollLeft;
+      touchStartSL = portfolioScroll.scrollLeft;
     }, { passive: true });
-
     portfolioScroll.addEventListener('touchmove', (e) => {
-      const dx = touchStartX - e.touches[0].pageX;
-      portfolioScroll.scrollLeft = touchStartScrollLeft + dx;
+      portfolioScroll.scrollLeft = touchStartSL + (touchStartX - e.touches[0].pageX);
     }, { passive: true });
   }
+
+  /* ─── SERVICE CARD 3D TILT ─── */
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.classList.remove('tilt-reset');
+    });
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * -16;
+      card.style.transform = `perspective(900px) rotateX(${y}deg) rotateY(${x}deg) scale3d(1.02,1.02,1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.add('tilt-reset');
+      card.style.transform = '';
+    });
+  });
+
+  /* ─── MAGNETIC BUTTONS ─── */
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.25;
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.25;
+      btn.style.transform = `translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
 
   /* ─── BOOKING FORM → WHATSAPP ─── */
   const form = document.getElementById('booking-form');
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const nombre = form.nombre.value.trim();
-      const telefono = form.telefono.value.trim();
-      const vehiculo = form.vehiculo.value.trim();
-      const servicio = form.servicio.value;
-      const mensaje = form.mensaje.value.trim();
-
-      if (!nombre || !telefono || !vehiculo || !servicio) return;
-
+      const n = form.nombre.value.trim();
+      const t = form.telefono.value.trim();
+      const v = form.vehiculo.value.trim();
+      const s = form.servicio.value;
+      const m = form.mensaje.value.trim();
+      if (!n || !t || !v || !s) return;
       const text = encodeURIComponent(
-        `Hola, quiero agendar una cita:\n\n` +
-        `*Nombre:* ${nombre}\n` +
-        `*Teléfono:* ${telefono}\n` +
-        `*Vehículo:* ${vehiculo}\n` +
-        `*Servicio:* ${servicio}\n` +
-        `*Detalles:* ${mensaje || '—'}`
+        `Hola, quiero agendar una cita:\n\n*Nombre:* ${n}\n*Teléfono:* ${t}\n*Vehículo:* ${v}\n*Servicio:* ${s}\n*Detalles:* ${m || '—'}`
       );
-
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'form_submit', { service: servicio });
-      }
-
+      if (typeof gtag !== 'undefined') gtag('event', 'form_submit', { service: s });
       window.open(`https://wa.me/573013940718?text=${text}`, '_blank');
     });
   }
 
-  /* ─── WHATSAPP FLOAT DELAY ─── */
+  /* ─── WHATSAPP FLOAT ─── */
   const waFloat = document.getElementById('wa-float');
   if (waFloat) {
     waFloat.style.opacity = '0';
-    waFloat.style.transform = 'scale(0.5)';
-    waFloat.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+    waFloat.style.transform = 'scale(0.4)';
+    waFloat.style.transition = 'all 0.6s cubic-bezier(0.16,1,0.3,1)';
     setTimeout(() => {
       waFloat.style.opacity = '1';
       waFloat.style.transform = 'scale(1)';
-    }, 2000);
+    }, 3000);
   }
 
   /* ─── FOOTER YEAR ─── */
