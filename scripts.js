@@ -297,8 +297,50 @@
     }, 3000);
   }
 
+  /* ─── FAQ ACCORDION ─── */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    if (!q || !a) return;
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          const oa = other.querySelector('.faq-a');
+          if (oa) oa.style.maxHeight = null;
+        }
+      });
+      // Toggle this one
+      if (isOpen) {
+        item.classList.remove('open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  /* ─── BACK TO TOP ─── */
+  const backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.setAttribute('aria-label', 'Volver arriba');
+  backToTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  document.body.appendChild(backToTop);
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  }, { passive: true });
+
   /* ─── FOOTER YEAR ─── */
-  const yearEl = document.getElementById('footer-year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  document.querySelectorAll('#footer-year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+  });
 
 })();

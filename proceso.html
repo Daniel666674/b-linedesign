@@ -56,6 +56,16 @@
     "areaServed": { "@type": "City", "name": "Bogotá" }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://blinedesign.co/" },
+      { "@type": "ListItem", "position": 2, "name": "Proceso", "item": "https://blinedesign.co/proceso.html" }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -165,13 +175,73 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer-brand-bg" aria-hidden="true">B-LINE</div>
-    <div class="footer-copy">© <span id="footer-year"></span> B-Line Design · Bogotá, Colombia · Todos los derechos reservados</div>
-    <div class="footer-social">
-      <a href="https://instagram.com/b.linedesigncol" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://wa.me/573013940718" target="_blank" rel="noopener">WhatsApp</a>
+  <footer class="footer-premium">
+    <div class="footer-glow" aria-hidden="true"></div>
+    <div class="footer-main">
+      <div class="footer-col footer-col-brand">
+        <img src="assets/logo.png" alt="B-Line Design — wrap y detailing premium en Bogotá" class="footer-logo" />
+        <p class="footer-tagline">Estudio premium de wrap vinilo, PPF, polarizado, ceramic coating y diseño de cascos en Bogotá. Transformamos cada vehículo en una obra de arte — con disciplina, técnica y respeto absoluto por tu máquina.</p>
+        <div class="footer-socials">
+          <a class="footer-social-btn" href="https://instagram.com/b.linedesigncol" target="_blank" rel="noopener" aria-label="Instagram B-Line Design">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://wa.me/573013940718" target="_blank" rel="noopener" aria-label="WhatsApp B-Line Design">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          </a>
+          <a class="footer-social-btn" href="https://www.tiktok.com/@b.linedesigncol" target="_blank" rel="noopener" aria-label="TikTok B-Line Design">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 01-1.06-2.82h-3.2v12.36a2.43 2.43 0 11-2.43-2.43c.23 0 .45.03.66.1v-3.3a5.74 5.74 0 00-.66-.04 5.72 5.72 0 105.72 5.72V9.4a7.46 7.46 0 004.4 1.42V7.6a4.28 4.28 0 01-3.43-1.78z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="servicios.html">Wrap / Vinilo</a></li>
+          <li><a href="servicios.html">PPF — Protección de Pintura</a></li>
+          <li><a href="servicios.html">Polarizado</a></li>
+          <li><a href="servicios.html">Ceramic Coating</a></li>
+          <li><a href="servicios.html">Diseño de Cascos</a></li>
+          <li><a href="servicios.html">Detailing Premium</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="portafolio.html">Portafolio</a></li>
+          <li><a href="proceso.html">Proceso</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reserva.html">Reservar Cita</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-contact">
+        <h4 class="footer-heading">Contacto</h4>
+        <ul class="footer-contact-list">
+          <li class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <a href="https://maps.google.com/?q=Carrera+111+%2322J-29,+Bogot%C3%A1" target="_blank" rel="noopener">Carrera 111 #22J-29<br/>Bogotá, Colombia</a>
+          </li>
+          <li class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
+            <a href="https://wa.me/573013940718" target="_blank" rel="noopener">+57 301 394 0718</a>
+          </li>
+          <li class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><polyline points="12,6.5 12,12 16,14"/></svg>
+            <span>Lun–Vie 8:00–18:00<br/>Sáb 8:00–14:00 · Dom cerrado</span>
+          </li>
+        </ul>
+      </div>
     </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© <span id="footer-year"></span> B-Line Design · Todos los derechos reservados</div>
+      <div class="footer-legal">Hecho con precisión en Bogotá, Colombia</div>
+    </div>
+
+    <div class="footer-brand-bg" aria-hidden="true">B-LINE</div>
   </footer>
 
   <a href="https://wa.me/573013940718?text=Hola%2C%20quiero%20información%20sobre%20sus%20servicios" target="_blank" rel="noopener" class="whatsapp-float" id="wa-float" aria-label="Escríbenos por WhatsApp">
