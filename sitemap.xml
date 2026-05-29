@@ -8,4 +8,39 @@
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/"/>
   </url>
+  <url>
+    <loc>https://blinedesign.co/servicios.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/servicios.html"/>
+  </url>
+  <url>
+    <loc>https://blinedesign.co/portafolio.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/portafolio.html"/>
+  </url>
+  <url>
+    <loc>https://blinedesign.co/proceso.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/proceso.html"/>
+  </url>
+  <url>
+    <loc>https://blinedesign.co/reserva.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/reserva.html"/>
+  </url>
+  <url>
+    <loc>https://blinedesign.co/contacto.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://blinedesign.co/contacto.html"/>
+  </url>
 </urlset>
