@@ -16,7 +16,7 @@
   const preloader = document.getElementById('preloader');
   document.body.style.overflow = 'hidden';
 
-  const delay = isHome ? 1600 : 900;
+  const delay = isHome ? 700 : 350;
 
   function dismissPreloader() {
     preloader.classList.add('done');
