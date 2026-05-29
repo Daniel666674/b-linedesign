@@ -1,27 +1,39 @@
-/* B-LINE DESIGN — Main Scripts */
+/* B-LINE DESIGN — Main Scripts (Multi-Page) */
 
 (function () {
   'use strict';
+
+  /* ─── PAGE DETECTION ─── */
+  const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+  const isHome = currentFile === 'index.html' || currentFile === '';
+
+  /* ─── ACTIVE NAV ─── */
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if (link.getAttribute('href') === currentFile) link.classList.add('active');
+  });
 
   /* ─── PRELOADER ─── */
   const preloader = document.getElementById('preloader');
   document.body.style.overflow = 'hidden';
 
+  const delay = isHome ? 1600 : 900;
+
   function dismissPreloader() {
     preloader.classList.add('done');
     document.body.style.overflow = '';
-    // Trigger hero animations right as preloader slides up
-    setTimeout(() => {
-      document.body.classList.add('hero-ready');
-    }, 200);
+    // Trigger hero animations only if hero section exists (index page)
+    if (document.querySelector('.hero')) {
+      setTimeout(() => {
+        document.body.classList.add('hero-ready');
+      }, 200);
+    }
     setTimeout(() => preloader.remove(), 1200);
   }
 
-  // Wait for assets or 2s max
   if (document.readyState === 'complete') {
-    setTimeout(dismissPreloader, 1600);
+    setTimeout(dismissPreloader, delay);
   } else {
-    window.addEventListener('load', () => setTimeout(dismissPreloader, 1600));
+    window.addEventListener('load', () => setTimeout(dismissPreloader, delay));
   }
 
   /* ─── CUSTOM CURSOR ─── */
@@ -63,16 +75,25 @@
 
   /* ─── NAV SCROLL ─── */
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
 
-  document.getElementById('nav-logo-link').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  /* ─── LOGO CLICK: scroll to top on home, navigate on other pages ─── */
+  const navLogoLink = document.getElementById('nav-logo-link');
+  if (navLogoLink) {
+    navLogoLink.addEventListener('click', (e) => {
+      if (isHome) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      // On other pages: navigate normally (no preventDefault)
+    });
+  }
 
-  /* ─── SMOOTH SCROLL ─── */
+  /* ─── SMOOTH SCROLL for anchor links ─── */
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const id = link.getAttribute('href').slice(1);
@@ -90,18 +111,20 @@
   const mobileMenu = document.getElementById('mobile-menu');
 
   function closeMobileMenu() {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
+    if (hamburger) hamburger.classList.remove('open');
+    if (mobileMenu) mobileMenu.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+  }
 
-  /* ─── HERO VIDEO ─── */
+  /* ─── HERO VIDEO (only runs if hero elements exist) ─── */
   const heroVideo = document.getElementById('hero-video');
   const heroImg = document.getElementById('hero-img');
 
@@ -116,17 +139,21 @@
 
     heroVideo.addEventListener('canplay', () => {
       heroVideo.style.opacity = '1';
-      if (heroImg) heroImg.style.opacity = '0';
-      heroImg.style.transition = 'opacity 1.4s ease';
+      if (heroImg) {
+        heroImg.style.opacity = '0';
+        heroImg.style.transition = 'opacity 1.4s ease';
+      }
     }, { once: true });
   }
 
-  /* ─── PARALLAX HERO ─── */
+  /* ─── PARALLAX HERO (only runs if hero-bg exists) ─── */
   const heroBg = document.querySelector('.hero-bg');
-  window.addEventListener('scroll', () => {
-    if (!heroBg || window.scrollY > window.innerHeight) return;
-    heroBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
-  }, { passive: true });
+  if (heroBg) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > window.innerHeight) return;
+      heroBg.style.transform = `translateY(${window.scrollY * 0.35}px)`;
+    }, { passive: true });
+  }
 
   /* ─── SCROLL REVEAL ─── */
   const revealEls = document.querySelectorAll('.reveal');

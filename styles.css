@@ -1398,3 +1398,345 @@ body.hero-ready .hero-scroll-indicator {
   background:
     linear-gradient(to top, rgba(0,0,0,0.98) 0%, rgba(0,0,0,0.5) 35%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.4) 100%);
 }
+
+/* ─── PAGE BANNER (inner pages) ─── */
+.page-banner {
+  position: relative;
+  padding: 160px 40px 80px;
+  text-align: center;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+.page-banner-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 18vw, 220px);
+  color: rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: 0.05em;
+}
+
+.page-banner-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 100px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin: 16px 0 0;
+  color: var(--white);
+}
+
+/* ─── PORTFOLIO GRID FULL ─── */
+.portfolio-grid-full {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 60px;
+}
+
+@media (max-width: 900px) {
+  .portfolio-grid-full {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .portfolio-grid-full {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolio-grid-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+}
+
+.portfolio-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  opacity: 0.75;
+}
+
+.portfolio-grid-item:hover img {
+  transform: scale(1.07);
+  opacity: 1;
+}
+
+.portfolio-grid-item-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  transform: translateY(4px);
+  transition: transform 0.4s ease;
+}
+
+.portfolio-grid-item:hover .portfolio-grid-item-label {
+  transform: translateY(0);
+}
+
+/* ─── ACTIVE NAV LINK ─── */
+.nav-links a.active {
+  color: var(--white);
+  opacity: 1;
+}
+
+.nav-links a.active::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: var(--white);
+  margin-top: 2px;
+}
+
+/* ─── PROCESS PAGE ─── */
+.process-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 60px;
+}
+
+.process-step-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 40px;
+  align-items: start;
+  padding: 48px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.process-step-row:last-child {
+  border-bottom: none;
+}
+
+.process-step-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  color: rgba(255,255,255,0.08);
+  padding-top: 4px;
+}
+
+.process-step-content h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin: 0 0 12px;
+}
+
+.process-step-content p {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 600px;
+}
+
+@media (max-width: 600px) {
+  .process-step-row {
+    grid-template-columns: 50px 1fr;
+    gap: 20px;
+    padding: 32px 0;
+  }
+  .process-step-num { font-size: 48px; }
+}
+
+/* ─── CONTACT PAGE ─── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.contact-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.contact-item-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-item-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.contact-item-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  color: var(--white);
+}
+
+.contact-item-value a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.contact-item-value a:hover {
+  opacity: 0.7;
+}
+
+.contact-map {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border: 1px solid rgba(255,255,255,0.08);
+  filter: grayscale(100%) contrast(1.1);
+}
+
+/* ─── BOOKING PAGE ─── */
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  margin-top: 60px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .booking-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.schedule-block {
+  padding: 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+}
+
+.schedule-block h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin: 0 0 24px;
+}
+
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+}
+
+.schedule-row:last-child { border-bottom: none; }
+.schedule-day { color: var(--muted); }
+.schedule-time { color: var(--white); font-weight: 500; }
+
+.page-banner .section-label { display: inline-block; margin-bottom: 8px; }
+
+/* ─── PORTFOLIO GRID OVERLAY ─── */
+.portfolio-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.portfolio-grid-item:hover .portfolio-grid-overlay { opacity: 1; }
+
+.portfolio-grid-overlay span:first-child {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--white);
+  display: block;
+}
+
+.portfolio-grid-overlay span:last-child {
+  font-size: 11px;
+  color: var(--gray-light);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ─── PAGE BANNER LEFT-ALIGNED OVERRIDE ─── */
+.page-banner {
+  text-align: left;
+  padding: 160px 60px 80px;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.page-banner-bg-text {
+  position: absolute;
+  right: 40px;
+  bottom: -30px;
+  top: auto;
+  left: auto;
+  transform: none;
+  font-size: clamp(80px, 14vw, 220px);
+  letter-spacing: 8px;
+  white-space: nowrap;
+}
+
+.page-banner-title {
+  font-size: clamp(52px, 7vw, 100px);
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .page-banner { padding: 140px 32px 60px; }
+}
+
+@media (max-width: 768px) {
+  .page-banner { padding: 120px 24px 48px; }
+  .page-banner-bg-text { font-size: 60px; right: 20px; }
+}
