@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://[DOMINIO]/</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/"/>
+  </url>
+  <url>
+    <loc>https://[DOMINIO]/servicios.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/servicios.html"/>
+  </url>
+  <url>
+    <loc>https://[DOMINIO]/portafolio.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/portafolio.html"/>
+  </url>
+  <url>
+    <loc>https://[DOMINIO]/proceso.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/proceso.html"/>
+  </url>
+  <url>
+    <loc>https://[DOMINIO]/reserva.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/reserva.html"/>
+  </url>
+  <url>
+    <loc>https://[DOMINIO]/contacto.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-CO" href="https://[DOMINIO]/contacto.html"/>
+  </url>
+</urlset>
