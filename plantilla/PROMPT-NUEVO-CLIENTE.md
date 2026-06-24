@@ -73,7 +73,9 @@ HTML parsee, haz commit en una rama nueva y abre un PR en borrador.
 4. Reseñas: relleno las reales o dejo/quito la sección (nunca invento reseñas).
 5. Imágenes: si las mandas, las pongo en `assets/`; si no, dejo los placeholders.
 6. Validación: `grep` de tokens `[ ]` restantes + parseo HTML de las 6 páginas.
-7. Commit en rama nueva + PR en borrador.
+7. **Vista previa**: renderizo capturas (hero + secciones clave) para que
+   revises el resultado antes de publicar.
+8. Commit en rama nueva + PR en borrador.
 
 Campos marcados como "pendiente" quedan como token para completar luego; el
 sitio funciona igual mientras tanto.
