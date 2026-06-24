@@ -21,7 +21,7 @@
   }
 
   /* reveal on scroll */
-  var reveals = document.querySelectorAll('.section, .service-card, .cover-card, .why-card, .hero-copy, .hero-visual');
+  var reveals = document.querySelectorAll('.section, .service-card, .cover-card, .why-card, .hero-copy, .hero-visual, .video-card');
   if ('IntersectionObserver' in window) {
     reveals.forEach(function (el) { el.classList.add('reveal'); });
     var io = new IntersectionObserver(function (entries) {
